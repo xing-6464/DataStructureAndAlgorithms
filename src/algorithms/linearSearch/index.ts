@@ -6,7 +6,7 @@ export default function linearSearch<T>(data: T[], target: T, fn?: CallFn<T>): n
         if (!fn) {
             if (k === target) return i
         } else {
-            if (fn(k, target)) return i 
+            if (fn(k, target)) return i
         }
     }
 
