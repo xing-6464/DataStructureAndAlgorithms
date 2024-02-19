@@ -1,4 +1,4 @@
-import linearSearch from "./algorithms/linearSearch"
+import search from "./algorithms/search"
 import utils from "./utils"
 
 const dataSize = [1000000, 10000000]
@@ -7,7 +7,7 @@ for (const n of dataSize) {
 
     console.time(n.toString())
     for (let i = 0; i < 100; i++) {
-        linearSearch(arr, n)
+        search.linearSearch(arr, n)
     }
     console.timeEnd(n.toString())
 }
