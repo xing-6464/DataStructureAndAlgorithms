@@ -1,13 +1,11 @@
 type CallFn<T> = (value: T, target: T) => boolean
 
-interface SearchImpl {
+interface Search {
     linearSearch: <T>(data: T[], target: T, fn?: CallFn<T>) => number
 }
 
-class Search implements SearchImpl {
-    static search = new Search()
-
-    linearSearch<T>(data: T[], target: T, fn?: CallFn<T>): number {
+const Search: Search = {
+    linearSearch: <T>(data: T[], target: T, fn?: CallFn<T>): number  => {
         for (const [i, k] of data.entries()) {
         if (!fn) {
             if (k === target) return i
@@ -20,4 +18,4 @@ class Search implements SearchImpl {
     }
 }
 
-export default Search.search
+export default Search

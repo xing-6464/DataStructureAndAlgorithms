@@ -1,4 +1,5 @@
-import search from "./algorithms/search"
+import Search from "./algorithms/search"
+import Sort from "./algorithms/sort"
 import utils from "./utils"
 
 const dataSize = [1000000, 10000000]
@@ -7,9 +8,11 @@ for (const n of dataSize) {
 
     console.time(n.toString())
     for (let i = 0; i < 100; i++) {
-        search.linearSearch(arr, n)
+        Search.linearSearch(arr, n)
     }
     console.timeEnd(n.toString())
 }
 
-
+const arr2 = [3, 2, 1]
+Sort.selectionSort(arr2)
+console.log(arr2)
