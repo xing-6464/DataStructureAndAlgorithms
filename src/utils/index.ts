@@ -1,17 +1,25 @@
-class Utils {
-    static utils = new Utils()
-      
-    private constructor() {}
+export function generateArray(n: number) {
+  const arr = []
 
-    arrayGenerator(n: number) {
-        const arr = []
+  for (let i = 0; i < n; i++) {
+    arr.push(i)
+  }
 
-        for (let i = 0; i < n; i++) {
-            arr.push(i)
-        }
-
-        return arr
-    }
+  return arr
 }
 
-export default Utils.utils
+export function generateRandomArray(n: number) {
+  const arr = []
+
+  for (let i = 0; i < n; i++) {
+    arr.push(Math.floor(Math.random() * n))
+  }
+
+  return arr
+}
+
+export function swap<T>(data: T[], i: number, minIndex: number) {
+  let t = data[i]
+  data[i] = data[minIndex]
+  data[minIndex] = t
+}
