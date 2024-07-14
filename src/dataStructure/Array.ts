@@ -24,11 +24,12 @@ class MyArray<T> {
   }
 
   insert(index: number, e: T) {
-    if (this._size === this._data.length) {
-      throw new ReferenceError('add failed, array is full')
-    }
     if (index < 0 || index > this._size) {
       throw new RangeError('add failed, index out of range')
+    }
+
+    if (this._size === this._data.length) {
+      this.resize(2 * this._data.length)
     }
     for (let i = this._size - 1; i >= index; i--) {
       this._data[i + 1] = this._data[i]
@@ -110,6 +111,10 @@ class MyArray<T> {
       this._data[i - 1] = this._data[i]
     }
     this._size--
+
+    if (this._size === this._data.length / 4) {
+      this.resize(this._data.length / 2)
+    }
     return ret
   }
 
@@ -129,6 +134,14 @@ class MyArray<T> {
 
   shift() {
     return this.remove(0)
+  }
+
+  private resize(newCapacity: number) {
+    const newData = new Array<T>(newCapacity)
+    for (let i = 0; i < this._size; i++) {
+      newData[i] = this._data[i]
+    }
+    this._data = newData
   }
 }
 

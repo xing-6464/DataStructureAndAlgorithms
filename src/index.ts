@@ -1,10 +1,19 @@
 import MyArray from './dataStructure/Array'
 import Student from './test/student'
 
-const arr = new MyArray<Student>()
+const arr = new MyArray()
 
-arr.push(new Student('John', 100))
-arr.push(new Student('Mary', 80))
-arr.push(new Student('Tom', 90))
+for (let i = 0; i < 10; i++) {
+  arr.push(i)
+}
 
-console.info(`${arr}`)
+console.log(arr.toString())
+
+arr.unshift(10)
+console.log(arr.toString())
+
+for (let i = 0; i < 6; i++) {
+  arr.pop()
+}
+
+console.log(arr.toString())
