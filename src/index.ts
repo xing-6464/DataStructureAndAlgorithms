@@ -14,4 +14,13 @@ arr.unshift(-1)
 console.log(arr.toString())
 
 console.log(arr.get(1))
-console.log(arr[1])
+
+arr.remove(2)
+console.log(arr.toString())
+
+arr.removeElement(2)
+console.log(arr.toString())
+arr.pop()
+arr.shift()
+console.log(arr.toString())
+console.log(arr.length)

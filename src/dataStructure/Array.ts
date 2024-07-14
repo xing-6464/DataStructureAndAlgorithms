@@ -69,4 +69,66 @@ export default class MyArray<T> {
     }
     this._data[index] = e
   }
+
+  contains(e: number) {
+    for (let i = 0; i < this._size; i++) {
+      if (this._data[i] === e) {
+        return true
+      }
+    }
+    return false
+  }
+
+  // 存在返回索引，不存在返回-1
+  findIndex(e: number) {
+    for (let i = 0; i < this._size; i++) {
+      if (this._data[i] === e) {
+        return i
+      }
+    }
+    return -1
+  }
+
+  // 存在返回true，不存在返回false
+  find(e: number) {
+    for (let i = 0; i < this._size; i++) {
+      if (this._data[i] === e) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  // 根据索引删除元素
+  remove(index: number) {
+    if (index < 0 || index >= this._size) {
+      throw new RangeError('remove failed, index out of range')
+    }
+
+    let ret = this._data[index]
+    for (let i = index + 1; i < this._size; i++) {
+      this._data[i - 1] = this._data[i]
+    }
+    this._size--
+    return ret
+  }
+
+  // 根据元素删除元素
+  removeElement(e: number) {
+    let index = this.findIndex(e)
+    if (index !== -1) {
+      this.remove(index)
+      return true
+    }
+    return false
+  }
+
+  pop() {
+    return this.remove(this._size - 1)
+  }
+
+  shift() {
+    return this.remove(0)
+  }
 }
