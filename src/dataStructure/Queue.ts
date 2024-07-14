@@ -1,56 +1,52 @@
 import MyArray from './Array'
 
-interface IStack<T> {
-  push(item: T): void
-  pop(): T | undefined
-  peek(): T | undefined
+interface IQueue<T> {
+  unshift(value: T): void
+  shift(): T | undefined
   isEmpty(): boolean
+  get front(): T | undefined
   get length(): number
 }
 
-class Stack<T> implements IStack<T> {
+class Queue<T> implements IQueue<T> {
   private array: MyArray<T>
 
   constructor(capacity?: number) {
     if (capacity) {
-      this.array = new MyArray(capacity)
+      this.array = new MyArray<T>(capacity)
     } else {
-      this.array = new MyArray()
+      this.array = new MyArray<T>()
     }
   }
 
-  push(item: T): void {
-    this.array.push(item)
+  unshift(value: T): void {
+    this.array.unshift(value)
   }
-
-  pop(): T | undefined {
-    return this.array.pop()
+  shift(): T | undefined {
+    return this.array.shift()
   }
-
-  peek(): T | undefined {
-    return this.array.last
-  }
-
   isEmpty(): boolean {
     return this.array.isEmpty()
   }
-
+  get front(): T | undefined {
+    return this.array.get(0)
+  }
   get length(): number {
     return this.array.length
   }
 
   toString() {
     let res = ''
-    res += 'Stack: ['
+    res += 'Queue: front ['
     for (let i = 0; i < this.array.length; i++) {
       res += this.array.get(i)
       if (i !== this.array.length - 1) {
         res += ', '
       }
     }
-    res += '] top'
+    res += '] tail'
     return res
   }
 }
 
-export default Stack
+export default Queue
