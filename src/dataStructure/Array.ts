@@ -112,7 +112,7 @@ class MyArray<T> {
     }
     this._size--
 
-    if (this._size === this._data.length / 4) {
+    if (this._size === this._data.length / 4 && this._data.length / 2 !== 0) {
       this.resize(this._data.length / 2)
     }
     return ret
