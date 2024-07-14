@@ -1,17 +1,17 @@
 import Student from './test/student'
 import ArrayStack from './dataStructure/Stack'
 import Queue from './dataStructure/Queue'
+import LoopQueue from './dataStructure/LoopQueue'
 
-const arr = new ArrayStack()
+const loopQueue = new LoopQueue<number>()
 
-const queue = new Queue<number>()
+loopQueue.enqueue(1)
+loopQueue.enqueue(2)
+loopQueue.enqueue(3)
+loopQueue.enqueue(4)
+loopQueue.enqueue(2)
+loopQueue.dequeue()
+loopQueue.dequeue()
+loopQueue.dequeue()
 
-queue.unshift(10)
-queue.unshift(20)
-queue.unshift(30)
-queue.unshift(40)
-
-console.log(queue.toString())
-
-queue.shift()
-console.log(queue.toString())
+console.log(loopQueue.toString())

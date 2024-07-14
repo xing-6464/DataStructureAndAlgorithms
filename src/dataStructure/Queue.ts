@@ -1,6 +1,6 @@
 import MyArray from './Array'
 
-interface IQueue<T> {
+export interface IQueue<T> {
   unshift(value: T): void
   shift(): T | undefined
   isEmpty(): boolean
