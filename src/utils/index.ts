@@ -1,5 +1,5 @@
 export function generateArray(n: number) {
-  const arr = []
+  const arr: number[] = []
 
   for (let i = 0; i < n; i++) {
     arr.push(i)
@@ -9,7 +9,7 @@ export function generateArray(n: number) {
 }
 
 export function generateRandomArray(n: number) {
-  const arr = []
+  const arr: number[] = []
 
   for (let i = 0; i < n; i++) {
     arr.push(Math.floor(Math.random() * n))

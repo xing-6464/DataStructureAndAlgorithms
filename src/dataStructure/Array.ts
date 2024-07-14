@@ -1,10 +1,9 @@
-export default class MyArray<T> {
-  private _data: number[]
-  private _size: number;
-  [index: number]: number
+class MyArray<T> {
+  private _data: T[]
+  private _size: number
 
   constructor(capacity: number = 10) {
-    this._data = new Array(capacity)
+    this._data = new Array<T>(capacity)
     this._size = 0
   }
 
@@ -16,15 +15,15 @@ export default class MyArray<T> {
     return this._data.length
   }
 
-  push(e: number) {
+  push(e: T) {
     this.insert(this._size, e)
   }
 
-  unshift(e: number) {
+  unshift(e: T) {
     this.insert(0, e)
   }
 
-  insert(index: number, e: number) {
+  insert(index: number, e: T) {
     if (this._size === this._data.length) {
       throw new ReferenceError('add failed, array is full')
     }
@@ -63,14 +62,14 @@ export default class MyArray<T> {
     return this._data[index]
   }
 
-  set(index: number, e: number) {
+  set(index: number, e: T) {
     if (index < 0 || index >= this._size) {
       throw new RangeError('set failed, index out of range')
     }
     this._data[index] = e
   }
 
-  contains(e: number) {
+  contains(e: T) {
     for (let i = 0; i < this._size; i++) {
       if (this._data[i] === e) {
         return true
@@ -80,7 +79,7 @@ export default class MyArray<T> {
   }
 
   // 存在返回索引，不存在返回-1
-  findIndex(e: number) {
+  findIndex(e: T) {
     for (let i = 0; i < this._size; i++) {
       if (this._data[i] === e) {
         return i
@@ -115,7 +114,7 @@ export default class MyArray<T> {
   }
 
   // 根据元素删除元素
-  removeElement(e: number) {
+  removeElement(e: T) {
     let index = this.findIndex(e)
     if (index !== -1) {
       this.remove(index)
@@ -132,3 +131,5 @@ export default class MyArray<T> {
     return this.remove(0)
   }
 }
+
+export default MyArray
