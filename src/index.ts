@@ -1,19 +1,9 @@
-import MyArray from './dataStructure/Array'
 import Student from './test/student'
+import ArrayStack from './dataStructure/Stack'
 
-const arr = new MyArray()
+const arr = new ArrayStack()
 
-for (let i = 0; i < 10; i++) {
-  arr.push(i)
-}
-
-console.log(arr.toString())
-
-arr.unshift(10)
-console.log(arr.toString())
-
-for (let i = 0; i < 6; i++) {
-  arr.pop()
-}
+arr.push(1)
+arr.push(2)
 
 console.log(arr.toString())

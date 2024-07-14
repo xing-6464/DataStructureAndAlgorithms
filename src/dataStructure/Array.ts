@@ -118,6 +118,14 @@ class MyArray<T> {
     return ret
   }
 
+  get first() {
+    return this.get(0)
+  }
+
+  get last() {
+    return this.get(this._size - 1)
+  }
+
   // 根据元素删除元素
   removeElement(e: T) {
     let index = this.findIndex(e)
