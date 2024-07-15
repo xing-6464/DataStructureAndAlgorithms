@@ -1,6 +1,6 @@
-import { insertionSort, selectionSort } from '../algorithms/sort'
+import { insertionSort, mergeSort, selectionSort } from '../algorithms/sort'
 
-type SortName = 'insertionSort' | 'selectionSort'
+type SortName = 'insertionSort' | 'selectionSort' | 'mergeSort'
 
 export function sortTest<T>(
   sortName: SortName,
@@ -14,6 +14,9 @@ export function sortTest<T>(
       break
     case 'selectionSort':
       selectionSort<T>(arr)
+      break
+    case 'mergeSort':
+      mergeSort<T>(arr, comp)
       break
     default:
       console.log('Invalid sort name')
