@@ -4,6 +4,11 @@ import LinkedList from './dataStructure/LinkedList'
 
 const links = new LinkedList<number>()
 
-links.addFirst(1)
+for (let i = 0; i < 10; i++) {
+  links.addFirst(i)
+}
 
-console.log(links.toString())
+links.add(4, 444)
+const res = links.contains(10)
+console.log(links.getFirst(), links.getLast(), links.getSize(), links.isEmpty())
+console.log(links.toString(), res)
