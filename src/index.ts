@@ -1,7 +1,11 @@
 import { sortTest } from './test'
-import { generateRandomArray } from './utils'
-const n = [1000000, 10000000]
+import { generateRandomArray, generateArray, swap } from './utils'
+import LinkedList from './dataStructure/LinkedList'
 
-for (const i of n) {
-  sortTest('mergeSort', generateRandomArray(i))
-}
+const links = new LinkedList()
+
+links.addFirst(1)
+links.addFirst(2)
+links.addFirst(3)
+
+console.log(links.toString())
