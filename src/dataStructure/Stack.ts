@@ -1,9 +1,9 @@
 import MyArray from './Array'
 
-interface IStack<T> {
+export interface IStack<T> {
   push(item: T): void
-  pop(): T | undefined
-  peek(): T | undefined
+  pop(): T | undefined | null
+  peek(): T | undefined | null
   isEmpty(): boolean
   get length(): number
 }

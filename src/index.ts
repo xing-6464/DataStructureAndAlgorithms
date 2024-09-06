@@ -1,22 +1,31 @@
 import { sortTest } from './test'
 import { generateRandomArray, generateArray, swap } from './utils'
-import LinkedList from './dataStructure/LinkedList'
+import LinkedList, { LinkedListStack } from './dataStructure/LinkedList'
+import Stack, { IStack } from './dataStructure/Stack'
 
-const links = new LinkedList<number>()
+function main() {
+  const opCount = 10000000
 
-for (let i = 0; i < 10; i++) {
-  links.addFirst(i)
+  const listStack = new LinkedListStack<number>()
+  const time1 = testStack(listStack, opCount)
+  console.log(`LinkedListStack: ${time1}s`)
+
+  const arrayStack = new Stack<number>()
+  const time2 = testStack(arrayStack, opCount)
+  console.log(`ArrayStack: ${time2}s`)
 }
 
-links.add(4, 444)
-const res = links.contains(10)
-console.log(links.toString(), res)
-links.remove(4)
-console.log(links.getFirst(), links.getLast(), links.getSize(), links.isEmpty())
-console.log(links.toString(), res)
+function testStack(stack: IStack<number>, opCount: number) {
+  const startTime = new Date().getTime()
+  for (let i = 0; i < opCount; i++) {
+    stack.push(Math.random() * Number.MAX_SAFE_INTEGER)
+  }
+  for (let i = 0; i < opCount; i++) {
+    stack.pop()
+  }
+  const endTime = new Date().getTime()
 
-links.removeFirst()
-console.log(links.toString())
+  return `${(endTime - startTime) / 1000}`
+}
 
-links.removeLast()
-console.log(links.toString())
+main()
