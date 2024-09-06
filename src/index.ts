@@ -10,5 +10,13 @@ for (let i = 0; i < 10; i++) {
 
 links.add(4, 444)
 const res = links.contains(10)
+console.log(links.toString(), res)
+links.remove(4)
 console.log(links.getFirst(), links.getLast(), links.getSize(), links.isEmpty())
 console.log(links.toString(), res)
+
+links.removeFirst()
+console.log(links.toString())
+
+links.removeLast()
+console.log(links.toString())

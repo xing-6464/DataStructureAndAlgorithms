@@ -88,6 +88,30 @@ class LinkedList<T> {
     this.add(this.size, n)
   }
 
+  remove(index: number) {
+    if (index < 0 || index >= this.size)
+      throw new RangeError('Index out of bounds')
+
+    let prev: Node<T> | null = this.dummyHead
+    for (let i = 0; i < index; i++) {
+      prev = prev!.next
+    }
+    const retNode = prev!.next
+    prev!.next = retNode!.next
+    retNode!.next = null
+    this.size--
+
+    return retNode?.n
+  }
+
+  removeFirst() {
+    return this.remove(0)
+  }
+
+  removeLast() {
+    return this.remove(this.size - 1)
+  }
+
   toString() {
     let res = ''
     let curr: Node<T> | null = this.dummyHead.next
