@@ -1,14 +1,7 @@
-import MyArray from './Array'
+import MyArray from '../Array'
+import type { Queue } from './type'
 
-export interface IQueue<T> {
-  unshift(value: T): void
-  shift(): T | undefined
-  isEmpty(): boolean
-  get front(): T | undefined
-  get length(): number
-}
-
-class Queue<T> implements IQueue<T> {
+class ArrayQueue<T> implements Queue<T> {
   private array: MyArray<T>
 
   constructor(capacity?: number) {
@@ -19,16 +12,16 @@ class Queue<T> implements IQueue<T> {
     }
   }
 
-  unshift(value: T): void {
+  enqueue(value: T): void {
     this.array.unshift(value)
   }
-  shift(): T | undefined {
+  dequeue(): T | undefined {
     return this.array.shift()
   }
   isEmpty(): boolean {
     return this.array.isEmpty()
   }
-  get front(): T | undefined {
+  getFront(): T | undefined {
     return this.array.get(0)
   }
   get length(): number {
@@ -49,4 +42,4 @@ class Queue<T> implements IQueue<T> {
   }
 }
 
-export default Queue
+export default ArrayQueue

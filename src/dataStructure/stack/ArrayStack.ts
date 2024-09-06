@@ -1,14 +1,7 @@
-import MyArray from './Array'
+import MyArray from '../Array'
+import type { Stack } from './type'
 
-export interface IStack<T> {
-  push(item: T): void
-  pop(): T | undefined | null
-  peek(): T | undefined | null
-  isEmpty(): boolean
-  get length(): number
-}
-
-class Stack<T> implements IStack<T> {
+class ArrayStack<T> implements Stack<T> {
   private array: MyArray<T>
 
   constructor(capacity?: number) {
@@ -53,4 +46,4 @@ class Stack<T> implements IStack<T> {
   }
 }
 
-export default Stack
+export default ArrayStack

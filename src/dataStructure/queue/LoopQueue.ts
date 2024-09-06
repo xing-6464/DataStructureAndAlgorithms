@@ -1,12 +1,7 @@
-interface IQueue<T> {
-  enqueue(item: T): void
-  dequeue(): T | undefined
-  isEmpty(): boolean
-  getFront(): T | undefined
-  get length(): number
-}
+// import type { IQueue } from "./ArrayQueue"
+import type { Queue } from './type'
 
-class LoopQueue<T> implements IQueue<T> {
+class LoopQueue<T> implements Queue<T> {
   private data: T[] = []
   private front = 0
   private tail = 0

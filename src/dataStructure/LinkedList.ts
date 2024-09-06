@@ -1,5 +1,3 @@
-import type { IStack } from './Stack'
-
 class LinkedList<T> {
   private dummyHead: Node<T>
   private size: number
@@ -127,38 +125,7 @@ class LinkedList<T> {
   }
 }
 
-export class LinkedListStack<T> implements IStack<T> {
-  constructor(private list: LinkedList<T> = new LinkedList()) {}
-
-  isEmpty(): boolean {
-    return this.list.isEmpty()
-  }
-  get length(): number {
-    return this.list.getSize()
-  }
-
-  push(item: T): void {
-    this.list.addFirst(item)
-  }
-
-  peek(): T | undefined | null {
-    return this.list.getFirst()
-  }
-
-  pop(): T | undefined | null {
-    return this.list.removeFirst()
-  }
-
-  toString() {
-    let res = ''
-    res += 'Stack: top '
-    res += this.list.toString()
-
-    return res
-  }
-}
-
-class Node<T> {
+export class Node<T> {
   constructor(public n: T | null = null, public next: Node<T> | null = null) {}
 
   toString() {
