@@ -76,10 +76,6 @@ class LinkedList<T> {
       prev = prev!.next
     }
 
-    // const node = new Node(n)
-    // node.next = prev!.next
-    // prev!.next = node
-
     prev!.next = new Node(n, prev!.next)
     this.size++
   }

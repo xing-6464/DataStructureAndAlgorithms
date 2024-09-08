@@ -1,3 +1,5 @@
-import { testAllQueue } from './dataStructure/queue/index'
+import { sortTest } from './test'
+import { generateRandomArray } from './utils'
 
-testAllQueue(10000000)
+const arr = generateRandomArray(100000)
+sortTest('mergeSort', arr)
