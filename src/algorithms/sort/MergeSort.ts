@@ -1,70 +1,37 @@
-function mergeSort<T>(
-  sortArr: T[],
-  fn: (a: T, b: T) => boolean = (a, b) => {
-    if (typeof a === 'number' && typeof b === 'number') {
-      if (a < b) return false
-      return true
-    }
-    throw new TypeError('Invalid type for sorting')
-  }
-) {
-  const sort = (arr: T[], l: number, r: number) => {
-    if (l >= r) return
-
-    const mid = (l + r) >> 1
-    sort(arr, l, mid)
-    sort(arr, mid + 1, r)
-    merge(arr, l, mid, r)
-  }
-  const merge = (arr: T[], left: number, mid: number, right: number) => {
-    const temp = arr.slice(left, right + 1)
-
-    let i = left,
-      j = mid + 1
-
-    for (let k = left; k <= right; k++) {
-      if (i > mid) {
-        arr[k] = temp[j - left]
-        j++
-      } else if (j > right) {
-        arr[k] = temp[i - left]
-        i++
-      } else if (!fn(temp[i - left], temp[j - left])) {
-        arr[k] = temp[i - left]
-        i++
-      } else {
-        arr[k] = temp[j - left]
-        j++
-      }
-    }
-  }
-
-  sort(sortArr, 0, sortArr.length - 1)
-}
+import { InsertionSort } from './InsertionSort'
 
 export class MergeSort {
-  static sort<T>(arr: T[], compareFn?: (a: T, b: T) => boolean) {
-    this._sort(arr, 0, arr.length - 1)
+  static sort<T>(
+    arr: T[],
+    compareFn: (a: T, b: T) => boolean = this.compareFn
+  ) {
+    this._sort(arr, 0, arr.length - 1, compareFn)
   }
 
-  static sort2<T>(arr: T[], compareFn?: (a: T, b: T) => boolean) {
-    this._sort2(arr, 0, arr.length - 1, this.compareFn)
+  static sort2<T>(
+    arr: T[],
+    compareFn: (a: T, b: T) => boolean = this.compareFn
+  ) {
+    this._sort2(arr, 0, arr.length - 1, compareFn)
   }
 
   private static _sort2<T>(
     arr: T[],
     l: number,
     r: number,
-    compareFn?: (a: T, b: T) => boolean
+    compareFn: (a: T, b: T) => boolean
   ) {
-    if (l >= r) return
+    // if (l >= r) return
+    if (r - l <= 15) {
+      InsertionSort.insertionSort(arr, l, r, compareFn)
+      return
+    }
 
     const mid = l + ((r - l) >> 1)
     this._sort2(arr, l, mid, compareFn)
     this._sort2(arr, mid + 1, r, compareFn)
 
-    // 后面数值第一个值大于前面数组第一个值情况下不需要归并
-    if (!compareFn?.(arr[mid], arr[mid + 1])) {
+    if (!compareFn(arr[mid], arr[mid + 1])) {
       this.merge(arr, l, mid, r, compareFn)
     }
   }
@@ -73,14 +40,18 @@ export class MergeSort {
     arr: T[],
     l: number,
     r: number,
-    compareFn?: (a: T, b: T) => boolean
+    compareFn: (a: T, b: T) => boolean
   ) {
     if (l >= r) return
 
     const mid = l + ((r - l) >> 1)
     this._sort(arr, l, mid, compareFn)
     this._sort(arr, mid + 1, r, compareFn)
-    this.merge(arr, l, mid, r, compareFn)
+
+    // 后面数值第一个值大于前面数组第一个值情况下不需要归并
+    if (!compareFn?.(arr[mid], arr[mid + 1])) {
+      this.merge(arr, l, mid, r, compareFn)
+    }
   }
 
   private static merge<T>(
@@ -88,7 +59,7 @@ export class MergeSort {
     left: number,
     mid: number,
     right: number,
-    compareFn: (a: T, b: T) => boolean = this.compareFn
+    compareFn: (a: T, b: T) => boolean
   ) {
     const temp = arr.slice(left, right + 1)
 

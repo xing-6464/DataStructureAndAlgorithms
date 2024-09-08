@@ -3,6 +3,7 @@ import { generateArray, generateRandomArray } from './utils'
 
 const arr = generateRandomArray(100000)
 const arr1 = arr.slice()
+const arr1_1 = arr1.slice()
 const arr2 = generateArray(1000000)
 const arr3 = arr2.slice()
 

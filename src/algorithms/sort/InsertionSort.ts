@@ -1,28 +1,38 @@
 type CompareFn<T> = (prev: T, next: T) => boolean
 
 export class InsertionSort {
-  static sort<T>(arr: T[], compareFn?: CompareFn<T>): void {
-    this.insertionSort(arr, compareFn)
+  static sort<T>(arr: T[], compareFn: CompareFn<T> = this.compareFn): void {
+    this._insertionSort(arr, compareFn)
   }
 
-  private static insertionSort<T>(arr: T[], compareFn?: CompareFn<T>): void {
-    for (let i = 1; i < arr.length; i++) {
-      for (let j = i; j - 1 >= 0; j--) {
-        const isValue = compareFn
-          ? compareFn(arr[j], arr[j - 1])
-          : arr[j] < arr[j - 1]
-        if (isValue) {
-          this.swap(arr, j, j - 1)
-        } else {
-          break
-        }
+  private static _insertionSort<T>(arr: T[], compareFn: CompareFn<T>): void {
+    for (let i = 0; i < arr.length; i++) {
+      let t = arr[i],
+        j = 0
+      for (j = i; j - 1 >= 0 && compareFn(t, arr[j - 1]); j--) {
+        arr[j] = arr[j - 1]
       }
+      arr[j] = t
     }
   }
 
-  private static swap<T>(arr: T[], i: number, j: number): void {
-    const temp = arr[i]
-    arr[i] = arr[j]
-    arr[j] = temp
+  public static insertionSort<T>(
+    arr: T[],
+    l: number,
+    r: number,
+    compareFn: CompareFn<T> = this.compareFn
+  ) {
+    for (let i = l; i <= r; i++) {
+      let t = arr[i]
+      let j = 0
+      for (j = i; j - 1 >= l && compareFn(t, arr[j - 1]); j--) {
+        arr[j] = arr[j - 1]
+      }
+      arr[j] = t
+    }
+  }
+
+  private static compareFn<T = number>(a: T, b: T): boolean {
+    return a < b
   }
 }
