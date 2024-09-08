@@ -1,4 +1,4 @@
-import { insertionSort, MergeSort, selectionSort } from '../algorithms/sort'
+import { InsertionSort, MergeSort, SelectionSort } from '../algorithms/sort'
 
 type SortName = 'insertionSort' | 'selectionSort' | 'mergeSort'
 
@@ -10,10 +10,10 @@ export function sortTest<T>(
   const now = new Date().getTime()
   switch (sortName) {
     case 'insertionSort':
-      insertionSort<T>(arr, comp)
+      InsertionSort.sort(arr, comp)
       break
     case 'selectionSort':
-      selectionSort<T>(arr)
+      SelectionSort.sort(arr)
       break
     case 'mergeSort':
       MergeSort.sort(arr, comp)
@@ -24,6 +24,7 @@ export function sortTest<T>(
   const elapsed = new Date().getTime() - now
   if (!isSorted(arr)) {
     console.error(`${sortName} sort failed`)
+    return
   }
   console.log(`${sortName} sort n = ${arr.length}, time: ${elapsed / 1000}s`)
 }
