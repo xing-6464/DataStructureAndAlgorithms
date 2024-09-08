@@ -47,6 +47,28 @@ export class MergeSort {
     this._sort(arr, 0, arr.length - 1)
   }
 
+  static sort2<T>(arr: T[], compareFn?: (a: T, b: T) => boolean) {
+    this._sort2(arr, 0, arr.length - 1, this.compareFn)
+  }
+
+  private static _sort2<T>(
+    arr: T[],
+    l: number,
+    r: number,
+    compareFn?: (a: T, b: T) => boolean
+  ) {
+    if (l >= r) return
+
+    const mid = l + ((r - l) >> 1)
+    this._sort2(arr, l, mid, compareFn)
+    this._sort2(arr, mid + 1, r, compareFn)
+
+    // 后面数值第一个值大于前面数组第一个值情况下不需要归并
+    if (!compareFn?.(arr[mid], arr[mid + 1])) {
+      this.merge(arr, l, mid, r, compareFn)
+    }
+  }
+
   private static _sort<T>(
     arr: T[],
     l: number,
