@@ -8,6 +8,29 @@ export class MergeSort {
     this._sort(arr, 0, arr.length - 1, compareFn)
   }
 
+  // 归并排序自底向上
+  static sortBu<T>(
+    arr: T[],
+    compareFn: (a: T, b: T) => boolean = this.compareFn
+  ) {
+    let n = arr.length
+
+    for (let sz = 1; sz < n; sz += sz) {
+      // 合并[i, i+sz-1]和[i+sz, min(i+sz+sz-1, n-1)]
+      for (let i = 0; i + sz < n; i += sz + sz) {
+        if (!compareFn(arr[i + sz - 1], arr[i + sz])) {
+          this.merge(
+            arr,
+            i,
+            i + sz - 1,
+            Math.min(i + sz + sz - 1, n - 1),
+            compareFn
+          )
+        }
+      }
+    }
+  }
+
   static sort2<T>(
     arr: T[],
     compareFn: (a: T, b: T) => boolean = this.compareFn
