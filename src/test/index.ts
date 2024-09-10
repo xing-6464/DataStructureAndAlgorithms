@@ -1,6 +1,16 @@
-import { InsertionSort, MergeSort, SelectionSort } from '../algorithms/sort'
+import {
+  InsertionSort,
+  MergeSort,
+  QuickSort,
+  SelectionSort,
+} from '../algorithms/sort'
 
-type SortName = 'insertionSort' | 'selectionSort' | 'mergeSort' | 'mergeSortBu'
+type SortName =
+  | 'insertionSort'
+  | 'selectionSort'
+  | 'mergeSort'
+  | 'mergeSortBu'
+  | 'quickSort'
 
 export function sortTest<T>(
   sortName: SortName,
@@ -20,6 +30,9 @@ export function sortTest<T>(
       break
     case 'mergeSortBu':
       MergeSort.sortBu(arr, comp)
+      break
+    case 'quickSort':
+      QuickSort.sort(arr)
       break
     default:
       console.log('Invalid sort name')
