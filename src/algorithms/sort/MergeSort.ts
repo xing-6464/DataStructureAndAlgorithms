@@ -15,15 +15,19 @@ export class MergeSort {
   ) {
     let n = arr.length
 
-    for (let sz = 1; sz < n; sz += sz) {
+    for (let i = 0; i < n; i += 16) {
+      InsertionSort.insertionSort(arr, i, Math.min(i + 15, n - 1), compareFn)
+    }
+
+    for (let sz = 16; sz < n; sz += sz) {
       // 合并[i, i+sz-1]和[i+sz, min(i+sz+sz-1, n-1)]
       for (let i = 0; i + sz < n; i += sz + sz) {
         if (!compareFn(arr[i + sz - 1], arr[i + sz])) {
           const minLastIndex = Math.min(i + sz + sz - 1, n - 1)
-          if (minLastIndex - i + sz - 1 <= 15) {
-            InsertionSort.insertionSort(arr, i, minLastIndex, compareFn)
-            continue
-          }
+          // if (minLastIndex - i + sz - 1 <= 15) {
+          //   InsertionSort.insertionSort(arr, i, minLastIndex, compareFn)
+          //   continue
+          // }
 
           this.merge(arr, i, i + sz - 1, minLastIndex, compareFn)
         }
