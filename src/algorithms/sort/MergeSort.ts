@@ -19,26 +19,19 @@ export class MergeSort {
       // 合并[i, i+sz-1]和[i+sz, min(i+sz+sz-1, n-1)]
       for (let i = 0; i + sz < n; i += sz + sz) {
         if (!compareFn(arr[i + sz - 1], arr[i + sz])) {
-          this.merge(
-            arr,
-            i,
-            i + sz - 1,
-            Math.min(i + sz + sz - 1, n - 1),
-            compareFn
-          )
+          const minLastIndex = Math.min(i + sz + sz - 1, n - 1)
+          if (minLastIndex - i + sz - 1 <= 15) {
+            InsertionSort.insertionSort(arr, i, minLastIndex, compareFn)
+            continue
+          }
+
+          this.merge(arr, i, i + sz - 1, minLastIndex, compareFn)
         }
       }
     }
   }
 
-  static sort2<T>(
-    arr: T[],
-    compareFn: (a: T, b: T) => boolean = this.compareFn
-  ) {
-    this._sort2(arr, 0, arr.length - 1, compareFn)
-  }
-
-  private static _sort2<T>(
+  private static _sort<T>(
     arr: T[],
     l: number,
     r: number,
@@ -49,23 +42,6 @@ export class MergeSort {
       InsertionSort.insertionSort(arr, l, r, compareFn)
       return
     }
-
-    const mid = l + ((r - l) >> 1)
-    this._sort2(arr, l, mid, compareFn)
-    this._sort2(arr, mid + 1, r, compareFn)
-
-    if (!compareFn(arr[mid], arr[mid + 1])) {
-      this.merge(arr, l, mid, r, compareFn)
-    }
-  }
-
-  private static _sort<T>(
-    arr: T[],
-    l: number,
-    r: number,
-    compareFn: (a: T, b: T) => boolean
-  ) {
-    if (l >= r) return
 
     const mid = l + ((r - l) >> 1)
     this._sort(arr, l, mid, compareFn)
