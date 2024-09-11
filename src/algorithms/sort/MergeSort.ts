@@ -1,6 +1,8 @@
 import { InsertionSort } from './InsertionSort'
 
 export class MergeSort {
+  private constructor() {}
+
   static sort<T>(
     arr: T[],
     compareFn: (a: T, b: T) => boolean = this.compareFn
