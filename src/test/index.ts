@@ -11,6 +11,7 @@ type SortName =
   | 'mergeSort'
   | 'mergeSortBu'
   | 'quickSort'
+  | 'quickSort2ways'
 
 export function sortTest<T>(
   sortName: SortName,
@@ -33,6 +34,9 @@ export function sortTest<T>(
       break
     case 'quickSort':
       QuickSort.sort(arr)
+      break
+    case 'quickSort2ways':
+      QuickSort.sort2ways(arr)
       break
     default:
       console.log('Invalid sort name')

@@ -1,13 +1,21 @@
-export function generateArray(n: number) {
-  return Array.from<number, number>({ length: n }, (v, k) => k)
-}
+export class ArrayUtils {
+  private constructor() {}
 
-export function generateRandomArray(n: number) {
-  return Array.from({ length: n }, (v, k) => {
-    return (Math.random() * n) | 0
-  })
-}
+  static generateArray(n: number) {
+    return Array.from<number, number>({ length: n }, (v, k) => k)
+  }
 
-export function swap<T>(data: T[], i: number, minIndex: number) {
-  ;[data[i], data[minIndex]] = [data[minIndex], data[i]]
+  static generateRandomArray(n: number, item?: number) {
+    if (item !== undefined) {
+      return Array.from<number, number>({ length: n }, (v, k) => item)
+    }
+
+    return Array.from({ length: n }, (v, k) => {
+      return (Math.random() * n) | 0
+    })
+  }
+
+  private static swap<T>(data: T[], i: number, minIndex: number) {
+    ;[data[i], data[minIndex]] = [data[minIndex], data[i]]
+  }
 }
