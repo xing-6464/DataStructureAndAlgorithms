@@ -16,8 +16,25 @@ export class QuickSort {
     this.quickSort2ways(arr, 0, arr.length - 1)
   }
 
+  // 优化三: 三路快速排序
+  static sort3ways<T>(arr: T[]) {
+    this.quickSort3ways(arr, 0, arr.length - 1)
+  }
+
+  // 优化三: 三路快速排序
+  private static quickSort3ways<T>(arr: T[], l: number, r: number) {
+    if (r - l <= 15) {
+      InsertionSort.insertionSort(arr, l, r)
+      return
+    }
+
+    const { lt, gt } = this.partition3(arr, l, r)
+    this.quickSort3ways(arr, l, lt - 1)
+    this.quickSort3ways(arr, gt, r)
+  }
+
   // 优化二:双路快速排序
-  static quickSort2ways<T>(arr: T[], l: number, r: number) {
+  private static quickSort2ways<T>(arr: T[], l: number, r: number) {
     if (r - l <= 15) {
       InsertionSort.insertionSort(arr, l, r)
       return
@@ -26,6 +43,38 @@ export class QuickSort {
     const p = this.partition2(arr, l, r)
     this.quickSort2ways(arr, l, p - 1)
     this.quickSort2ways(arr, p + 1, r)
+  }
+
+  // 优化三: 三路快速排序
+  private static partition3<T>(arr: T[], l: number, r: number) {
+    const p = l + ((Math.random() * (r - l + 1)) | 0)
+    this.swap(arr, l, p)
+
+    // arr[l+1...lt] < v; arr[gt...r] > v; arr[lt+1...i-1] == v
+    let lt = l,
+      i = l + 1,
+      gt = r + 1
+    while (i < gt) {
+      if (arr[i] < arr[l]) {
+        lt++
+        this.swap(arr, lt, i)
+        i++
+      } else if (arr[i] > arr[l]) {
+        gt--
+        this.swap(arr, i, gt)
+      } else {
+        // arr[i] == arr[l]
+        i++
+      }
+    }
+
+    // arr[l...lt-1] < v; arr[gt...r] > v; arr[lt...i-1] == v
+    this.swap(arr, l, lt)
+
+    return {
+      lt,
+      gt,
+    }
   }
 
   // 优化第二个版本: 双路快速排序
