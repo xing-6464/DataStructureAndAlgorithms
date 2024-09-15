@@ -34,6 +34,29 @@ export class BinarySearch {
     return -1
   }
 
+  // > target 的最小值
+  static upper<T>(
+    data: T[],
+    target: T,
+    compare: (a: T, b: T) => number = this.compare
+  ) {
+    let l = 0,
+      r = data.length
+
+    // 在 [l, r] 范围内查找 target 的最小值
+    while (l < r) {
+      const mid = l + Math.floor((r - l) / 2)
+
+      if (compare(data[mid], target) >= 0) {
+        l = mid + 1
+      } else {
+        r = mid
+      }
+    }
+
+    return l
+  }
+
   // 递归
   private static _searchR<T>(
     data: T[],
