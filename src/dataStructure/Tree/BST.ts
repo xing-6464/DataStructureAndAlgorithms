@@ -52,6 +52,37 @@ export class BST<T extends { valueOf(): number }> {
     return node
   }
 
+  // 向node为根的二叉搜索树中插入元素e，非递归算法
+  private _add2(node: Node<T> | null, e: T) {
+    if (node === null) {
+      this.size++
+      this.root = new Node(e)
+      return
+    }
+
+    let cur = node
+    while (cur !== null) {
+      if (e.valueOf() < cur.e.valueOf()) {
+        if (cur.left === null) {
+          cur.left = new Node(e)
+          this.size++
+          return
+        }
+        cur = cur.left
+      } else if (e.valueOf() > cur.e.valueOf()) {
+        if (cur.right === null) {
+          cur.right = new Node(e)
+          this.size++
+          return
+        }
+        cur = cur.right
+      } else {
+        // e.valueOf() === cur.e.valueOf(), 元素已存在, 不插入
+        return
+      }
+    }
+  }
+
   isEmpty(): boolean {
     return this.size === 0
   }
