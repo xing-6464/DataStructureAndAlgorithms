@@ -6,6 +6,8 @@ const arr = [5, 3, 2, 6, 7]
 for (const num of arr) {
   bst.add(num)
 }
-bst.preOrder()
+// bst.preOrder()
+// bst.inOrder()
+bst.postOrder()
 
-console.log(`${bst}`)
+// console.log(`${bst}`)

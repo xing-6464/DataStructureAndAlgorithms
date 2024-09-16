@@ -119,26 +119,52 @@ export class BST<T extends INode> {
     this._preOrder(node.right)
   }
 
+  // 中序遍历, 递归，左-中-右
+  inOrder() {
+    this._inOrder(this.root)
+  }
+
+  private _inOrder(node: Node<T> | null) {
+    if (node === null) return
+
+    this._inOrder(node.left)
+    console.log(node.e)
+    this._inOrder(node.right)
+  }
+
+  // 后序遍历, 递归，左-右-中
+  postOrder() {
+    this._postOrder(this.root)
+  }
+
+  private _postOrder(node: Node<T> | null) {
+    if (node === null) return
+
+    this._postOrder(node.left)
+    this._postOrder(node.right)
+    console.log(node.e)
+  }
+
   toString() {
     let res = {
-      res: '',
+      s: '',
     }
     this.generateBSTString(this.root, 0, res)
-    return res.res
+    return res.s
   }
 
   // 生成以node为根节点，深度为depth的描述二叉树的字符串
   private generateBSTString(
     node: Node<T> | null,
     depth: number,
-    res: { res: string }
+    res: { s: string }
   ) {
     if (node === null) {
-      res.res += this.generateDepthString(depth) + 'null\n'
+      res.s += this.generateDepthString(depth) + 'null\n'
       return
     }
 
-    res.res += this.generateDepthString(depth) + node.e.toString() + '\n'
+    res.s += this.generateDepthString(depth) + node.e.toString() + '\n'
     this.generateBSTString(node.left, depth + 1, res)
     this.generateBSTString(node.right, depth + 1, res)
   }
