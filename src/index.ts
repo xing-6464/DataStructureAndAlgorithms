@@ -1,9 +1,11 @@
 import { BST } from './dataStructure/Tree/index'
 
 const bst = new BST<number>()
+const arr = [5, 3, 2, 6, 7]
 
-bst.add(10)
-bst.add(11)
-bst.add(9)
+for (const num of arr) {
+  bst.add(num)
+}
+bst.preOrder()
 
-console.log(bst.contains(11))
+console.log(`${bst}`)

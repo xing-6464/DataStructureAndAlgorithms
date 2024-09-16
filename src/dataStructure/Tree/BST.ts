@@ -106,6 +106,51 @@ export class BST<T extends INode> {
     }
   }
 
+  // 前序遍历, 递归，中-左-右
+  preOrder() {
+    this._preOrder(this.root)
+  }
+
+  private _preOrder(node: Node<T> | null) {
+    if (node === null) return
+
+    console.log(node.e)
+    this._preOrder(node.left)
+    this._preOrder(node.right)
+  }
+
+  toString() {
+    let res = {
+      res: '',
+    }
+    this.generateBSTString(this.root, 0, res)
+    return res.res
+  }
+
+  // 生成以node为根节点，深度为depth的描述二叉树的字符串
+  private generateBSTString(
+    node: Node<T> | null,
+    depth: number,
+    res: { res: string }
+  ) {
+    if (node === null) {
+      res.res += this.generateDepthString(depth) + 'null\n'
+      return
+    }
+
+    res.res += this.generateDepthString(depth) + node.e.toString() + '\n'
+    this.generateBSTString(node.left, depth + 1, res)
+    this.generateBSTString(node.right, depth + 1, res)
+  }
+
+  private generateDepthString(depth: number) {
+    let res = ''
+    for (let i = 0; i < depth; i++) {
+      res += '--'
+    }
+    return res
+  }
+
   isEmpty(): boolean {
     return this.size === 0
   }
