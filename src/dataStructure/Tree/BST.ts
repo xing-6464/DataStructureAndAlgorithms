@@ -1,3 +1,7 @@
+interface INode {
+  valueOf(): number | string
+}
+
 class Node<T> {
   e: T
   left: Node<T> | null
@@ -10,7 +14,7 @@ class Node<T> {
   }
 }
 
-export class BST<T extends { valueOf(): number }> {
+export class BST<T extends INode> {
   private root: Node<T> | null
   private size: number
 
@@ -80,6 +84,25 @@ export class BST<T extends { valueOf(): number }> {
         // e.valueOf() === cur.e.valueOf(), 元素已存在, 不插入
         return
       }
+    }
+  }
+
+  contains(e: T) {
+    return this._contains(this.root, e)
+  }
+
+  private _contains(node: Node<T> | null, e: T): boolean {
+    if (node === null) {
+      return false
+    }
+
+    // == 会调用valueOf方法
+    if (node.e.valueOf() === e.valueOf()) {
+      return true
+    } else if (e.valueOf() < node.e.valueOf()) {
+      return this._contains(node.left, e)
+    } else {
+      return this._contains(node.right, e)
     }
   }
 
