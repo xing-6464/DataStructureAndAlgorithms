@@ -57,6 +57,20 @@ export class BinarySearch {
     return l
   }
 
+  // > target 的最大值
+  // == target 的最大索引
+  static ceil<T>(
+    data: T[],
+    target: T,
+    compare: (a: T, b: T) => number = this.compare
+  ) {
+    const u = this.upper(data, target, compare)
+    if (u - 1 >= 0 && compare(data[u - 1], target) === 0) {
+      return u - 1
+    }
+    return u
+  }
+
   // 递归
   private static _searchR<T>(
     data: T[],
