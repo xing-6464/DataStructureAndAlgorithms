@@ -57,9 +57,10 @@ export class BinarySearch {
     return l
   }
 
+  // target存在
   // > target 的最大值
   // == target 的最大索引
-  static ceil<T>(
+  static upper_ceil<T>(
     data: T[],
     target: T,
     compare: (a: T, b: T) => number = this.compare
@@ -69,6 +70,33 @@ export class BinarySearch {
       return u - 1
     }
     return u
+  }
+
+  // >= target 的最小索引
+  static lower_ceil<T>(
+    data: T[],
+    target: T,
+    compare: (a: T, b: T) => number = this.compare
+  ) {
+    let l = 0,
+      r = data.length
+
+    // 在 [l, r] 范围内查找 target 的最小值
+    while (l < r) {
+      const mid = l + Math.floor((r - l) / 2)
+
+      // 在 upper 中，这里是 compare(data[mid], target) <= 0
+      // 但是，对于 lower_ceil 来说，在 data[mid] == target 的时候，有可能是解
+      // 所以在等于的情况下，不能排除掉 data[mid] 的值。在等于的情况下，应该归入下面的 else 中做处理
+      // 也就是，data[mid] == target 的时候可能是解，也可能有更小的解在左边，应该去更新右边界
+      if (compare(data[mid], target) > 0) {
+        l = mid + 1
+      } else {
+        r = mid
+      }
+    }
+
+    return l
   }
 
   // 递归
