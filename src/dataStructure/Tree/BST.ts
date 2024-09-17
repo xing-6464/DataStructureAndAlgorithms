@@ -308,6 +308,53 @@ export class BST<T extends INode> {
     return node
   }
 
+  // 递归删除节点
+  remove(e: T) {
+    this.root = this._remove(this.root, e)
+  }
+
+  private _remove(node: Node<T> | null, e: T): Node<T> | null {
+    if (node === null) {
+      return null
+    }
+
+    if (e.valueOf() < node.e.valueOf()) {
+      node.left = this._remove(node.left, e)
+      return node
+    } else if (e.valueOf() > node.e.valueOf()) {
+      node.right = this._remove(node.right, e)
+      return node
+    } else {
+      // e.valueOf() === node.e.valueOf()
+
+      // 待删除节点左子树为空
+      if (node.left === null) {
+        const rightNode = node.right
+        node.left = null
+        this.size--
+        return rightNode
+      }
+
+      // 待删除节点右子树为空
+      if (node.right === null) {
+        const leftNode = node.left
+        node.right = null
+        this.size--
+        return leftNode
+      }
+
+      // 待删除节点左右子树均不为空
+      // 找到比待删除节点大的最小节点，即待删除节点右子树的最小节点
+      // 用这个节点顶替待删除节点的位置
+      const successor = this._minimum(node.right)
+      successor.right = this._removeMin(node.right)
+      successor.left = node.left
+
+      node.left = node.right = null
+      return successor
+    }
+  }
+
   private _minimum(node: Node<T> | null): Node<T> {
     if (node?.left === null) {
       return node
