@@ -111,6 +111,27 @@ export class BST<T extends INode> {
     this._preOrder(this.root)
   }
 
+  // 前序遍历, 非递归，中-左-右
+  preOrderNR() {
+    if (this.root === null) return
+
+    const stack: Array<Node<T>> | null = []
+
+    stack.push(this.root)
+    while (stack.length !== 0) {
+      let cur = stack.pop()
+      if (cur == null) continue
+
+      console.log(cur.e)
+      if (cur.right !== null) {
+        stack.push(cur.right)
+      }
+      if (cur.left !== null) {
+        stack.push(cur.left)
+      }
+    }
+  }
+
   private _preOrder(node: Node<T> | null) {
     if (node === null) return
 
@@ -124,6 +145,38 @@ export class BST<T extends INode> {
     this._inOrder(this.root)
   }
 
+  // 中序遍历, 非递归，左-中-右
+  inOrderNR() {
+    if (this.root === null) return
+
+    const stack: Array<Node<T>> = []
+
+    // 先把最左边的节点入栈
+    stack.push(this.root)
+    let cur = this.root.left
+    while (cur !== null) {
+      stack.push(cur)
+      cur = cur.left
+    }
+
+    // 弹出栈顶节点，打印，并将右子树入栈
+    while (stack.length !== 0) {
+      const inCur = stack.pop() as Node<T>
+      console.log(inCur.e)
+
+      if (inCur.right !== null) {
+        stack.push(inCur.right)
+
+        // 右子树入栈后，再把右子树的最左边的节点入栈
+        let cur = inCur.right.left
+        while (cur !== null) {
+          stack.push(cur)
+          cur = cur.left
+        }
+      }
+    }
+  }
+
   private _inOrder(node: Node<T> | null) {
     if (node === null) return
 
@@ -135,6 +188,39 @@ export class BST<T extends INode> {
   // 后序遍历, 递归，左-右-中
   postOrder() {
     this._postOrder(this.root)
+  }
+
+  // 后序遍历, 非递归，左-右-中
+  postOrderNR() {
+    if (this.root === null) return
+    const stack: Array<Node<T>> = []
+
+    // 先把最左边的节点入栈
+    stack.push(this.root)
+    let cur = this.root.left
+    while (cur !== null) {
+      stack.push(cur)
+      cur = cur.left
+    }
+
+    // 弹出栈顶节点，打印，并将右子树入栈
+    while (stack.length !== 0) {
+      const postCur = stack.pop() as Node<T>
+
+      // 先打印右子树，再打印自己
+      if (postCur.right !== null) {
+        stack.push(new Node(postCur.e))
+        stack.push(postCur.right)
+
+        let cur = postCur.right.left
+        while (cur !== null) {
+          stack.push(cur)
+          cur = cur.left
+        }
+      } else {
+        console.log(postCur.e)
+      }
+    }
   }
 
   private _postOrder(node: Node<T> | null) {
