@@ -231,6 +231,26 @@ export class BST<T extends INode> {
     console.log(node.e)
   }
 
+  // 广度优先搜索
+  levelOrder() {
+    if (this.root === null) return
+
+    const queue: Array<Node<T>> = []
+    queue.push(this.root)
+
+    while (queue.length !== 0) {
+      const cur = queue.shift() as Node<T>
+      console.log(cur.e)
+
+      if (cur.left !== null) {
+        queue.push(cur.left)
+      }
+      if (cur.right !== null) {
+        queue.push(cur.right)
+      }
+    }
+  }
+
   toString() {
     let res = {
       s: '',
