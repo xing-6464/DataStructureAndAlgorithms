@@ -251,6 +251,71 @@ export class BST<T extends INode> {
     }
   }
 
+  maximum() {
+    if (this.size === 0) throw new Error('BST is empty')
+
+    return this._maximum(this.root).e
+  }
+
+  private _maximum(node: Node<T> | null): Node<T> {
+    if (node?.right === null) {
+      return node
+    }
+
+    return this._maximum(node?.right!)
+  }
+
+  minimum() {
+    if (this.size === 0) throw new Error('BST is empty')
+
+    return this._minimum(this.root).e
+  }
+
+  removeMin() {
+    const minNode = this.minimum()
+
+    this._removeMin(this.root)
+    return minNode
+  }
+
+  private _removeMin(node: Node<T> | null): Node<T> | null {
+    if (node?.left === null) {
+      const rightNode = node.right
+      node.right = null
+      this.size--
+      return rightNode
+    }
+
+    node!.left = this._removeMin(node!.left)
+    return node
+  }
+
+  removeMax() {
+    const maxNode = this.maximum()
+    this._removeMax(this.root)
+    return maxNode
+  }
+
+  private _removeMax(node: Node<T> | null): Node<T> | null {
+    if (node?.right === null) {
+      const leftNode = node.left
+      node.right = null
+      this.size--
+      return leftNode
+    }
+
+    node!.right = this._removeMax(node!.right)
+    return node
+  }
+
+  private _minimum(node: Node<T> | null): Node<T> {
+    if (node?.left === null) {
+      return node
+    }
+
+    return this._minimum(node?.left!)
+  }
+
   toString() {
     let res = {
       s: '',
