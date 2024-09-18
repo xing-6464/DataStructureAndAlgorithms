@@ -1,4 +1,4 @@
-class LinkedList<T> {
+class LinkedList<T extends { valueOf(): number | string }> {
   private dummyHead: Node<T>
   private size: number
 
@@ -106,6 +106,21 @@ class LinkedList<T> {
 
   removeLast() {
     return this.remove(this.size - 1)
+  }
+
+  removeElement(n: T) {
+    let cur: Node<T> | null = this.dummyHead
+
+    while (cur.next) {
+      if (cur.next.n === n) {
+        const retNode = cur.next
+        cur.next = retNode.next
+        retNode.next = null
+        this.size--
+        return retNode
+      }
+      cur = cur.next
+    }
   }
 
   toString() {
