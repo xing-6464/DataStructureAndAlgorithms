@@ -4,6 +4,7 @@ import {
   QuickSort,
   SelectionSort,
 } from '../algorithms/sort'
+import { Set } from '../dataStructure/Tree'
 
 type SortName =
   | 'insertionSort'
@@ -62,3 +63,5 @@ export function isSorted<T>(arr: T[]): boolean {
 
   return true
 }
+
+export function testSet<T>(set: Set<T>, str: string) {}

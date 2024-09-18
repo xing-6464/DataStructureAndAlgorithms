@@ -1,12 +1,5 @@
 import { BST } from './BST'
-
-interface Set<T> {
-  get size(): number
-  add(e: T): void
-  remove(e: T): void
-  contains(e: T): boolean
-  isEmpty(): boolean
-}
+import type { Set } from '.'
 
 export class BSTSet<T extends { valueOf(): number | string }>
   implements Set<T>

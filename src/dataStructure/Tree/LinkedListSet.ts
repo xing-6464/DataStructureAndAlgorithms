@@ -1,12 +1,5 @@
 import LinkedList from '../LinkedList'
-
-interface Set<T> {
-  get size(): number
-  add(e: T): void
-  remove(e: T): void
-  contains(e: T): boolean
-  isEmpty(): boolean
-}
+import type { Set } from '.'
 
 export class LinkedListSet<T extends { valueOf(): number | string }>
   implements Set<T>

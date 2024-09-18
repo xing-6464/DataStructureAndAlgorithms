@@ -1,12 +1,15 @@
-import { LinkedListSet } from './dataStructure/Tree/LinkedListSet'
+import { LinkedListMap } from './dataStructure/Tree'
 
-const linkedSet = new LinkedListSet<number>()
+const map = new LinkedListMap<string, number>()
 
-for (let i = 0; i < 10; i++) {
-  linkedSet.add(i)
+const str = 'hellohhas'
+
+for (let i = 0; i < str.length; i++) {
+  if (map.has(str[i])) {
+    map.set(str[i], map.get(str[i])! + 1)
+  } else {
+    map.set(str[i], 1)
+  }
 }
 
-console.log(linkedSet.size)
-linkedSet.remove(5)
-
-console.log(linkedSet.size)
+console.log(map.get('x'))
