@@ -1,7 +1,3 @@
-interface INode {
-  valueOf(): number | string
-}
-
 class Node<T> {
   e: T
   left: Node<T> | null
@@ -14,7 +10,7 @@ class Node<T> {
   }
 }
 
-export class BST<T extends INode> {
+export class BST<T extends { valueOf(): number | string }> {
   private root: Node<T> | null
   private size: number
 

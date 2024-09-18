@@ -1,11 +1,3 @@
-import { BST } from './dataStructure/Tree/index'
+import { BSTSet } from './dataStructure/Tree/BSTSet'
 
-const bst = new BST<number>()
-
-for (let i = 0; i < 10; i++) {
-  bst.add(i)
-}
-
-console.log(bst.toString())
-bst.remove(8)
-console.log(bst.toString())
+const set = new BSTSet<string>()
