@@ -2,6 +2,7 @@ export * from './BST'
 export * from './BSTSet'
 export * from './LinkedListSet'
 export * from './LinkedListMap'
+export * from './BSTMap'
 
 export interface Set<T> {
   get size(): number
