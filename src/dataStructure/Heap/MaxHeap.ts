@@ -13,6 +13,22 @@ class MaxHeap<T extends { valueOf(): number | string }> {
     return this.size === 0
   }
 
+  // 向堆中插入一个元素
+  add(value: T) {
+    this.data.push(value)
+    this.shiftUp(this.size - 1)
+  }
+
+  private shiftUp(index: number) {
+    while (index > 0 && this.data[this.parent(index)] < this.data[index]) {
+      ;[this.data[this.parent(index)], this.data[index]] = [
+        this.data[index],
+        this.data[this.parent(index)],
+      ]
+      index = this.parent(index)
+    }
+  }
+
   // 返回当前索引的父节点的索引
   private parent(index: number): number {
     if (index === 0) throw new Error('No parent for root')
