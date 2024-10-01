@@ -1,27 +1,14 @@
-import { MaxHeap } from './dataStructure/Heap'
+import { sortTest } from './test'
+import { ArrayUtils } from './utils'
 
-let n = 100
+let n = 1000000
 
-const heap = new MaxHeap<number>()
+const arr = ArrayUtils.generateRandomArray(n)
+const arr2 = arr.slice()
+const arr3 = arr.slice()
+const arr4 = arr.slice()
 
-for (let i = 0; i < 10; i++) {
-  heap.add(Math.floor(Math.random() * 100))
-}
-
-for (let i = 0; i < 10; i++) {
-  console.log(heap.extractMax())
-}
-
-// const arr = [] as number[]
-// for (let i = 0; i < n; i++) {
-//   arr.push(heap.extractMax())
-// }
-
-// for (let i = 1; i < n; i++) {
-//   if (arr[i] > arr[i - 1]) {
-//     throw new Error('Heap property is violated')
-//   }
-// }
-
-console.log('Heap property is satisfied')
-console.log(heap)
+sortTest('mergeSortBu', arr)
+sortTest('quickSort2ways', arr2)
+sortTest('quickSort3ways', arr3)
+sortTest('heapSort', arr4)

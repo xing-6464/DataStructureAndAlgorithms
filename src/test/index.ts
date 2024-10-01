@@ -3,6 +3,7 @@ import {
   MergeSort,
   QuickSort,
   SelectionSort,
+  HeapSort,
 } from '../algorithms/sort'
 import { Set } from '../dataStructure/Tree'
 
@@ -14,8 +15,9 @@ type SortName =
   | 'quickSort'
   | 'quickSort2ways'
   | 'quickSort3ways'
+  | 'heapSort'
 
-export function sortTest<T>(
+export function sortTest<T extends { valueOf(): number | string }>(
   sortName: SortName,
   arr: T[],
   comp?: (a: T, b: T) => boolean
@@ -42,6 +44,9 @@ export function sortTest<T>(
       break
     case 'quickSort3ways':
       QuickSort.sort3ways(arr)
+      break
+    case 'heapSort':
+      HeapSort.sort(arr)
       break
     default:
       console.log('Invalid sort name')
