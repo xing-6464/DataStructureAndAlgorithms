@@ -1,5 +1,7 @@
 export class MaxHeap<T extends { valueOf(): number | string }> {
-  constructor(private data: T[] = []) {}
+  constructor(private data: T[] = []) {
+    this.heapify(data)
+  }
 
   get size(): number {
     return this.data.length
@@ -31,6 +33,7 @@ export class MaxHeap<T extends { valueOf(): number | string }> {
     return this.data[0]
   }
 
+  // 取出堆中最大元素，并删除该元素
   extractMax() {
     const ret = this.findMax()
 
@@ -39,6 +42,22 @@ export class MaxHeap<T extends { valueOf(): number | string }> {
     this.shiftDown(0)
 
     return ret
+  }
+
+  // 取最大元素，并且替换成新的元素
+  replace(value: T) {
+    const ret = this.findMax()
+    this.data[0] = value
+    this.shiftDown(0)
+    return ret
+  }
+
+  // 把数组转换成堆
+  heapify(arr: T[]) {
+    this.data = arr
+    for (let i = this.parent(this.size - 1); i >= 0; i--) {
+      this.shiftDown(i)
+    }
   }
 
   private shiftDown(index: number) {
