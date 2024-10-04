@@ -9,6 +9,10 @@ export class MinHeap<T extends { valueOf(): number | string }> {
     this.shiftUp(this.heap.length - 1)
   }
 
+  getMin(): T | undefined {
+    return this.heap[0]
+  }
+
   // 取出最小值并删除
   extractMin(): T | undefined {
     if (this.heap.length === 0) return undefined
