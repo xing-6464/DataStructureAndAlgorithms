@@ -1,11 +1,10 @@
-import { MaxHeap } from './dataStructure/Heap'
+import { MaxHeap, MinHeap } from './dataStructure/Heap'
 import { sortTest } from './test'
 import { ArrayUtils } from './utils'
 
-let n = 1000000
-
+let n = 10
 const arr = ArrayUtils.generateRandomArray(n)
-const arr2 = arr.slice()
-
-sortTest('heapSort', arr)
-sortTest('heapSort2', arr2)
+const minHeap = new MinHeap<number>(arr)
+console.log(minHeap)
+minHeap.replace(100)
+console.log(minHeap)
