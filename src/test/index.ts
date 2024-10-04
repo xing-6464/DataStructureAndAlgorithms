@@ -16,6 +16,7 @@ type SortName =
   | 'quickSort2ways'
   | 'quickSort3ways'
   | 'heapSort'
+  | 'heapSort2'
 
 export function sortTest<T extends { valueOf(): number | string }>(
   sortName: SortName,
@@ -47,6 +48,9 @@ export function sortTest<T extends { valueOf(): number | string }>(
       break
     case 'heapSort':
       HeapSort.sort(arr)
+      break
+    case 'heapSort2':
+      HeapSort.sort2(arr)
       break
     default:
       console.log('Invalid sort name')
