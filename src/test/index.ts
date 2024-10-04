@@ -4,6 +4,7 @@ import {
   QuickSort,
   SelectionSort,
   HeapSort,
+  BubbleSort,
 } from '../algorithms/sort'
 import { Set } from '../dataStructure/Tree'
 
@@ -17,6 +18,9 @@ type SortName =
   | 'quickSort3ways'
   | 'heapSort'
   | 'heapSort2'
+  | 'bubbleSort'
+  | 'bubbleSort2'
+  | 'bubbleSort3'
 
 export function sortTest<T extends { valueOf(): number | string }>(
   sortName: SortName,
@@ -51,6 +55,15 @@ export function sortTest<T extends { valueOf(): number | string }>(
       break
     case 'heapSort2':
       HeapSort.sort2(arr)
+      break
+    case 'bubbleSort':
+      BubbleSort.sort(arr)
+      break
+    case 'bubbleSort2':
+      BubbleSort.sort2(arr)
+      break
+    case 'bubbleSort3':
+      BubbleSort.sort3(arr)
       break
     default:
       console.log('Invalid sort name')
