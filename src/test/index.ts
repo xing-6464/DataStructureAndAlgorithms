@@ -23,6 +23,7 @@ type SortName =
   | 'bubbleSort2'
   | 'bubbleSort3'
   | 'ShellSort'
+  | 'ShellSort2'
 
 export function sortTest<T extends { valueOf(): number | string }>(
   sortName: SortName,
@@ -69,6 +70,9 @@ export function sortTest<T extends { valueOf(): number | string }>(
       break
     case 'ShellSort':
       ShellSort.sort(arr)
+      break
+    case 'ShellSort2':
+      ShellSort.sort2(arr)
       break
     default:
       console.log('Invalid sort name')
