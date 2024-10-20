@@ -1,9 +1,9 @@
 import { sortTest } from './test'
 import { ArrayUtils } from './utils/index'
+import SegmentTree, { Merger } from './dataStructure/Tree/SegmentTree'
 
-let n = 5000000
-const arr = ArrayUtils.generateRandomArray(n)
-const arr2 = arr.slice()
+const nums = [-2, 0, 3, -5, 2, -1]
 
-sortTest('ShellSort', arr)
-sortTest('ShellSort2', arr2)
+const segTree = new SegmentTree(nums, (a, b) => a + b)
+
+console.log(`${segTree}`)
