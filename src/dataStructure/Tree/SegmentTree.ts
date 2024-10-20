@@ -53,6 +53,53 @@ class SegmentTree<T> {
     return 2 * index + 2
   }
 
+  query(queryL: number, queryR: number) {
+    if (
+      queryL < 0 ||
+      queryL >= this.data.length ||
+      queryR < 0 ||
+      queryR >= this.data.length ||
+      queryL > queryR
+    )
+      throw new Error('Index out of range')
+
+    return this._query(0, 0, this.data.length - 1, queryL, queryR)
+  }
+
+  // 在以treeID为根的线段树中，[l...r]区间,搜索区间[queryL...queryR]的值
+  private _query(
+    treeIndex: number,
+    l: number,
+    r: number,
+    queryL: number,
+    queryR: number
+  ) {
+    if (l === queryL && r === queryR) {
+      return this.tree[treeIndex]
+    }
+
+    const mid = l + Math.floor((r - l) / 2)
+    const leftChildIndex = this.leftChild(treeIndex)
+    const rightChildIndex = this.rightChild(treeIndex)
+
+    if (queryL >= mid + 1) {
+      return this._query(rightChildIndex, mid + 1, r, queryL, queryR)
+    } else if (queryR <= mid) {
+      return this._query(leftChildIndex, l, mid, queryL, queryR)
+    }
+
+    const leftResult = this._query(leftChildIndex, l, mid, queryL, mid)
+    const rightResult = this._query(
+      rightChildIndex,
+      mid + 1,
+      r,
+      mid + 1,
+      queryR
+    )
+
+    return this.merger(leftResult, rightResult)
+  }
+
   toString() {
     let s = '['
     for (let i = 0; i < this.tree.length; i++) {
